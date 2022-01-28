@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+	<div class="row my-5">
+		<div class="col jumbotron">
+		  <h1 class="display-6 pb-4">How IMD-We Works</h1>
+		  <p class="lead mb-5">Register for a new account and set up a profile. Once logged in, users can search for titles using the IMDB API, and save their favorite movies to their profiles. Users can then see what their friends have been enjoying lately by viewing their profile, or see a full list of favorited movies on their personal dashboard.</p> 
+		  <p>Created by Mike Godwin, Erik Roberts, Jason Dehaemers, and Jonathan Garro</p>
+		</div>
+		<div class="col-md-4 mr-4">
+		<div id="carouselExampleIndicators" class="carousel slide mt-4 mb-5" data-ride="carousel">
+		  <ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		  </ol>
+		  <div class="carousel-inner">
+			<div class="carousel-item active">
+			  <img class="d-block w-100 rounded rounded-5" src="/static/img/back_to_future.jpg" alt="First slide">
+			</div>
+			<div class="carousel-item">
+			  <img class="d-block w-100 rounded rounded-5" src="/static/img/home_alone.jpg" alt="Second slide">
+			</div>
+			<div class="carousel-item">
+			  <img class="d-block w-100 rounded rounded-5" src="/static/img/king_kong.jpg" alt="Third slide">
+			</div>
+			<div class="carousel-item">
+			  <img class="d-block w-100 rounded rounded-5" src="/static/img/pulp_fiction.jpg" alt="Third slide">
+			</div>
+			<div class="carousel-item">
+			  <img class="d-block w-100 rounded rounded-5" src="/static/img/star_wars.jpg" alt="Third slide">
+			</div>
+		  </div>
+		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  </a>
+		</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
