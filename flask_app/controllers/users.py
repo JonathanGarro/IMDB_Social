@@ -1,9 +1,7 @@
 from flask_app import app
 from flask import render_template,redirect,session,request, flash, url_for
-
-# update models here
-# from flask_app.models import movies
-
+from flask_app.models import user
+from flask_app.models import movie
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -37,3 +35,17 @@ def login_process():
 	session['member_id'] = user.id
 	# flash(f"Welcome, ", "logged_in")
 	return redirect('/dashboard')
+
+@app.route('/new/member', methods=['POST'])
+def register_user():
+    if not user.User.validate_registration(request.form):
+        return redirect('/')
+    data = {
+        'first_name' : request.form['first_name'],
+        'last_name' : request.form['last_name'],
+        # 'screenname' : request.form['screenname'],
+        'email' : request.form['email'],
+        'password' : bcrypt.generate_password_hash(request.form['password'])
+        }
+    user.User.create(data)
+    return redirect('/')
