@@ -17,22 +17,24 @@ def about():
 	return render_template('about.html')
 	
 @app.route('/login')
-def login():
+def load_login_and_reg():
 	return render_template('login_reg.html')
 	
-@app.route('/login/user', methods=['POST'])
-def login_process():
-	user = user.User.get_user_by_email(request.form)
+@app.route('/login/member', methods=['POST'])
+def user_login():
+	member = user.User.get_by_email(request.form)
 	
-	if not user:
+	if not member:
 		flash("Invalid Email","login")
 		return redirect('/login')
 	
-	if not bcrypt.check_password_hash(user.password, request.form['password']):
+	if not bcrypt.check_password_hash(member.password, request.form['password']):
 		flash("Invalid Password","login")
 		return redirect('/login')
 	
-	session['member_id'] = user.id
+	session['member_id'] = member.id
+	session['user_email'] = member.email
+	session['logged_in'] = True
 	# flash(f"Welcome, ", "logged_in")
 	return redirect('/dashboard')
 
@@ -43,9 +45,18 @@ def register_user():
     data = {
         'first_name' : request.form['first_name'],
         'last_name' : request.form['last_name'],
-        # 'screenname' : request.form['screenname'],
+        'screenname' : request.form['screenname'],
         'email' : request.form['email'],
         'password' : bcrypt.generate_password_hash(request.form['password'])
         }
     user.User.create(data)
     return redirect('/')
+
+@app.route('/dashboard')
+def load_dashboard():
+    if 'logged_in' not in session:
+        return redirect('/')
+    member = user.User.get_by_id({'id' : session['member_id']})
+    movies = movie.Movie.get_all()
+    return render_template('dashboard.html', member=member, movies=movies)
+

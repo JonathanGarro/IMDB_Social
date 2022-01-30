@@ -4,7 +4,7 @@ from flask import flash
 from flask_app.models import user
 
 
-class Project:
+class Movie:
     db_name = 'movies_sn_schema'
     def __init__(self, data):
         self.id = data['id']
