@@ -20,7 +20,7 @@ class User:
     
     @classmethod
     def create(cls, data):
-        query = 'INSERT INTO users (screenname, email, password, first_name, last_name, city, state, about_me) VALUES ( %(screenname)s, %(email)s, %(password)s, %(first_name)s, %(last_name)s, %(city)s, %(state)s, %(about_me)s );'
+        query = 'INSERT INTO users (screenname, email, password, first_name, last_name) VALUES ( %(screenname)s, %(email)s, %(password)s, %(first_name)s, %(last_name)s );'
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     ### SELECT INDIVIDUAL USERS ###
@@ -97,7 +97,7 @@ class User:
         if len(form['password']) < 8:
             flash('Password must have at least 8 characters')
             is_valid = False
-        if form['password'] != form['confirm_password']:
+        if form['password'] != form['confirm']:
             flash('Passwords must match')
             is_valid = False
         return is_valid
