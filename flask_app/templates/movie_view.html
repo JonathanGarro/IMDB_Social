@@ -1,6 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-	
+	<div class="row mt-5">
+		<div class="col-md-4">
+			<div class="card text-dark bg-light">
+				<div class="card-header">
+					<h2 class="text-warning mt-3">{{output.title}}</h2>
+					<h5 class="text-warning">IMDB Rating: <span class="text-dark">{{output.imDbRating}}</span></h5>
+				</div>
+			  <div class="card-body d-flex flex-column">
+				<img src="{{output.image}}" width="100%">
+			  </div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="jumbotron">
+			  <h5 class="display-5">Movie Profile</h5>
+			  <p class="lead">Confirm that this is the film you're looking for!</p>
+			  <hr class="my-4">
+			  <div class="row mb-3">
+				<div class="col">
+					<h5 class="text-secondary">Release Year</h5>
+					<h3>{{output.year}}</h3>
+				</div>
+				<div class="col">
+					<h5 class="text-secondary">Rating</h5>
+					<h3>{{output.contentRating}}</h3>
+				</div>
+				<div class="col">
+					<h5 class="text-secondary">Genres</h5>
+					<h3>{{output.genres}}</h3>
+				</div>
+			  </div>
+			  <input type="submit" value="Favorite!" class="btn btn-warning">
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock content %}
