@@ -78,6 +78,12 @@ class User:
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     
+    ### ADD FAVORITE ###
+    @classmethod
+    def add_favorite(cls, data):
+        query = 'INSERT INTO favorites (user_id, movie_id) VALUES ( %(user_id)s, %(movie_id)s );'
+        return connectToMySQL(cls.db_name).query_db(query, data)
+    
     ### REGISTRATION VALIDATION ###
     @staticmethod
     def validate_registration( form ):

@@ -26,6 +26,14 @@ class Movie:
             return None
         return cls(results[0])
     
+    @classmethod
+    def get_by_title(cls, data):
+        query = 'SELECT * FROM movies WHERE title = %(title)s;'
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        if len(results) == 0:
+            return False
+        return cls(results[0])
+    
     def get_user_favorites(cls, data):
         query = 'SELECT * FROM movies JOIN favorites ON movies.id = favorites.movie_id WHERE favorites.user_id = %(user_id)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
