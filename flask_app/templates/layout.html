@@ -23,13 +23,14 @@
 		</button>
 	  <div class="collapse navbar-collapse" id="main_nav">
 		<ul class="navbar-nav ms-auto">
-			{% if session['user_id'] %}
+			{% if session['member_id'] %}
 				{% if request.path == '/profile' %}
 					<li class="nav-item px-3"><button type="button" class="btn btn-dark">Profile</button></li>
 				{% else %}
-				<li class="nav-item px-3"><a class="nav-link text-dark" href="/profile">Profile </a></li>
+				<li class="nav-item px-3"><a class="btn btn-outline-dark" href="/movies"> Search </a></li>
+				<li class="nav-item px-3"><a class="btn btn-outline-dark" href="/profile">Profile </a></li>
 				{% endif %}
-				<li class="nav-item px-3"><a class="nav-link text-dark" href="/logout"> Logout </a></li>
+				<li class="nav-item px-3"><a class="btn btn-outline-dark" href="/logout"> Logout </a></li>
 			{% else %}
 				<li class="nav-item px-3"><a class="nav-link text-dark" href="/movies"> Try It (temp dev shortcut) </a></li> 
 				<li class="nav-item px-3"><a class="nav-link text-dark" href="/about"> About </a></li>
