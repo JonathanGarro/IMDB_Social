@@ -1,72 +1,53 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-    <h1 class="display-6 pb-4">Welcome, {{ member.first_name }}</h1>
-    <p class="lead">Check out some movies!</p>
-    <div class="row">
-<div class="col-md-3">
-
-<div id="carouselExampleCaptions" class="carousel slide mt-4 mb-5" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"></button>
-
-    </div>
-    <div class="carousel-inner">
-        {% for item in output %}
-    <div class="carousel-item {% if loop.index == 1 %} active{% endif %}"  data-bs-interval="10000">
-        <img class="d-block w-100 rounded rounded-5" src="{{item.image}}" alt="First slide">
-        <div class="carousel-caption d-none d-md-block">
-        <h5 class='fw-bold'>{{ item.title }}</h5>
-        <p class='fw-bold'>Rank #{{ item.rank }}</p>
+    <h1 class="display-6 py-4">Welcome, {{ member.first_name }}</h1>
+    <p class="lead">Here are the most popular movies on IMDB!</p>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                </div>
+            </div>
+            <div class="carousel-inner">
+                {% for item in output %}
+            <div class="carousel-item {% if loop.index == 1 %} active{% endif %}"  data-bs-interval="10000">
+                <img class="d-block w-100 rounded rounded-5" src="{{item.image}}" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                <h5 class='fw-bold'>{{ item.title }}</h5>
+                <p class='fw-bold'>Rank #{{ item.rank }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="list-group">
+                {% for item in output %}
+                <a href="/movies/search/results/{{ item.id }}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ item.title }}</h5>
+                    <small>Rank: #{{ item.rank }}</small>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-    {% endfor %}
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-    </div>
 </div>
-</div>
-
-
-
-    <div class="row align-self-center">
-        <div class="col d-inline-block">
-
-        </div>
-    </div>
-
-
-
-
-    <div class="col-md-4">
-    <div class="h-25 d-inline-block overflow-auto">
-    <div class="list-group">
-    
-    {% for item in output %}
-    <a href="/movies/search/results/{{ item.id }}" class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{ item.title }}</h5>
-        <small>Rank: #{{ item.rank }}</small>
-    </div>
-    </a>
-    {% endfor %}
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
 {% endblock content %}
