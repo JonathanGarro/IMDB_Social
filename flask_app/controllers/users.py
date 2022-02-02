@@ -58,18 +58,18 @@ def load_dashboard():
     if 'logged_in' not in session:
         return redirect('/')
     member = user.User.get_by_id({'id' : session['member_id']})
-    #movies = movie.Movie.get_all()
-    api_key = "k_kogbi1sw"
-    api_call = 'https://imdb-api.com/en/API/MostPopularMovies/' + api_key + '/'
-    r = requests.get(api_call).json()
-    output = []
-    for x in r['items']:
-        temp_dict = {}
-        temp_dict['title'] = x['title']
-        temp_dict['id'] = x['id']
-        temp_dict['image'] = x['image']
-        temp_dict['rank'] = x['rank']
-        output.append(temp_dict)
-    print(output)
+    output = movie.Movie.get_all()
+    # api_key = "k_kogbi1sw"
+    # api_call = 'https://imdb-api.com/en/API/MostPopularMovies/' + api_key + '/'
+    # r = requests.get(api_call).json()
+    # output = []
+    # for x in r['items']:
+    #     temp_dict = {}
+    #     temp_dict['title'] = x['title']
+    #     temp_dict['id'] = x['id']
+    #     temp_dict['image'] = x['image']
+    #     temp_dict['rank'] = x['rank']
+    #     output.append(temp_dict)
+    # print(output)
     return render_template('dashboard.html', member=member, output=output)
 

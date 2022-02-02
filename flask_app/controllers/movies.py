@@ -65,3 +65,23 @@ def show_single_result(search_term):
     output['imDbRating'] = r['imDbRating']
     print(output)
     return render_template('movie_view.html', output=output)
+
+@app.route('/add_favorite/', methods=['POST'])
+def add_favorite():
+    if 'logged_in' not in session:
+        return redirect('/')
+    data = {
+        'title' : request.form['title'],
+        'genre' : request.form['genre'],
+        'release_date' : request.form['release_date']
+    }
+    favorite = movie.Movie.get_by_title(data)
+    if not favorite:
+        favorite = movie.Movie.create(data)
+    fav_data = {
+        'movie_id' : favorite.id,
+        'user_id' : session['member_id']
+    }
+    user.User.add_favorite(fav_data)
+    return redirect('/profile_view.html')
+        
