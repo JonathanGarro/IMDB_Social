@@ -8,10 +8,22 @@ import requests
 def view_movie_info(movie_id):
     if 'logged_in' not in session:
         return redirect('/')
-    movie = movie.Movie.get_by_movie_id({ 'movie_id' : movie_id })
-    user = user.User.get_by_id({ 'id' : session.id })
-    fans = user.User.get_by_movie_favorited({ 'movie_id' : movie_id })
-    return render_template('movie_view.html', movie=movie, user=user, fans=fans)
+    film = movie.Movie.get_by_movie_id({ 'movie_id' : movie_id })
+    member = user.User.get_by_id({ 'id' : session['member_id'] })
+    fans = user.User.get_by_movie_favorited({ 'movie_id' : film.id })
+    api_key = "k_r5saubta"
+    api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + film.imdb_id
+    r = requests.get(api_call).json()
+    output = {}
+    output['title'] = r['title']
+    output['id'] = r['id']
+    output['image'] = r['image']
+    output['year'] = r['year']
+    output['releaseDate'] = r['releaseDate']
+    output['genres'] = r['genres']
+    output['contentRating'] = r['contentRating']
+    output['imDbRating'] = r['imDbRating']
+    return render_template('movie_view.html', output=output, film=film, member=member, fans=fans)
 
 @app.route('/movies/')
 def search_page():
@@ -27,7 +39,6 @@ def search_movie():
     
 @app.route('/movies/search/<search_term>')
 def show_results(search_term):
-    print(f"SEARCH")
     search = search_term
     api_key = "k_r5saubta"
     api_call = 'https://imdb-api.com/en/API/Search/' + api_key + '/' + search
@@ -64,7 +75,6 @@ def show_single_result(search_term):
     output['genres'] = r['genres']
     output['contentRating'] = r['contentRating']
     output['imDbRating'] = r['imDbRating']
-    print(output)
     return render_template('movie_view.html', output=output)
 
 @app.route('/add_favorite/', methods=['POST'])
@@ -85,7 +95,7 @@ def add_favorite():
         'movie_id' : favorite.id,
         'user_id' : session['member_id']
     }
-    user.User.add_favorite(fav_data)
-    print("running redirect")
-    return redirect('/profile_view')
+    if not movie.Movie.already_favorite(fav_data):
+        user.User.add_favorite(fav_data)
+    return redirect('/dashboard')
     
