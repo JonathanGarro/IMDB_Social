@@ -11,7 +11,7 @@ def view_movie_info(movie_id):
     film = movie.Movie.get_by_movie_id({ 'movie_id' : movie_id })
     member = user.User.get_by_id({ 'id' : session['member_id'] })
     fans = user.User.get_by_movie_favorited({ 'movie_id' : film.id })
-    api_key = "k_r5saubta"
+    api_key = "k_kogbi1sw"
     api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + film.imdb_id
     r = requests.get(api_call).json()
     output = {}
@@ -40,10 +40,11 @@ def search_movie():
 @app.route('/movies/search/<search_term>')
 def show_results(search_term):
     search = search_term
-    api_key = "k_r5saubta"
+    api_key = "k_kogbi1sw"
     api_call = 'https://imdb-api.com/en/API/Search/' + api_key + '/' + search
     r = requests.get(api_call).json()
     output = []
+    print(f'---- {r}')
     for x in r['results']:
         temp_dict = {}
         temp_dict['title'] = x['title']
@@ -63,7 +64,7 @@ def search_movie_results():
 @app.route('/movies/search/results/<search_term>')
 def show_single_result(search_term):
     search = search_term
-    api_key = "k_r5saubta"
+    api_key = "k_kogbi1sw"
     api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + search
     r = requests.get(api_call).json()
     output = {}
@@ -75,7 +76,11 @@ def show_single_result(search_term):
     output['genres'] = r['genres']
     output['contentRating'] = r['contentRating']
     output['imDbRating'] = r['imDbRating']
-    return render_template('movie_view.html', output=output)
+    fave_ids = []
+    faves = movie.Movie.get_user_favorites({ 'user_id' : session['member_id']})
+    for fave in faves:
+        fave_ids.append(fave.imdb_id)
+    return render_template('movie_view.html', output=output, fave_ids=fave_ids)
 
 @app.route('/add_favorite/', methods=['POST'])
 def add_favorite():
@@ -95,7 +100,6 @@ def add_favorite():
         'movie_id' : favorite.id,
         'user_id' : session['member_id']
     }
-    if not movie.Movie.already_favorite(fav_data):
-        user.User.add_favorite(fav_data)
+    user.User.add_favorite(fav_data)
     return redirect('/dashboard')
     

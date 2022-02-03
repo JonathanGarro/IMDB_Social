@@ -39,7 +39,9 @@
 				<input type="hidden" id="genre" name="genre" value="{{output.genres}}">
 				<input type="hidden" id="release_date" name="release_date" value="{{output.year}}">
 				<input type="hidden" id="imdb_id" name="imdb_id" value="{{output.id}}">
+				{% if output.id not in fave_ids%}
 				<input type="submit" value="Favorite!" class="btn btn-warning">
+				{% endif %}
 			</div>
 		</div>
 	</div>
