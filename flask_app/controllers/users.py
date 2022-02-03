@@ -63,7 +63,7 @@ def update_user():
     if 'user_id' not in session:
         return redirect('/logout')
     if user.User.edit_user(request.form):
-        return redirect(f"/update/member/{request.form['id']}")
+        return redirect("/update/member/{request.form['id']}")
     # if not user.User.validate_registration(request.form):
     #     return redirect('/')
     data = {
