@@ -2,6 +2,15 @@
 {% block content %}
 <div class="container">
 	<div class="row py-5">
+		<div class="row my-5">
+			<form action="/movies/search/" method="POST" class="mx-auto p-4 bg-light text-light rounded-3">
+				<div class="form-group pb-4">
+					<label class="pb-2 text-dark" for="search_term">Search Again?</label>
+					<input type="text" name="search_term" class="form-control">
+				</div>
+				<input type="submit" value="Search" class="btn btn-warning">
+			</form>
+		</div>
 		<table class="table">
 			<thead>
 				<tr>
