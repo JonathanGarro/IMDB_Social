@@ -20,7 +20,12 @@ def about():
 @app.route('/login')
 def load_login_and_reg():
 	return render_template('login_reg.html')
-	
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
 @app.route('/login/member', methods=['POST'])
 def user_login():
 	member = user.User.get_by_email(request.form)
