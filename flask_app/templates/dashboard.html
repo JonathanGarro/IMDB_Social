@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <h1 class="display-6 py-4">Welcome, {{ member.first_name }}</h1>
-    <p class="lead">Here are the most popular movies on IMDB!</p>
+    <p class="lead">Here is what you and your friends like on IMDB!</p>
     <div class="row mt-5">
         <div class="col-md-4">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -18,7 +18,7 @@
             </div>
             <div class="carousel-inner">
                 {% for r in output %}
-                {% if r in faves_ids %}
+                {% if r.id in faves_ids %}
             <div class="carousel-item {% if loop.index == 1 %} active{% endif %}"  data-bs-interval="10000">
                 <img class="d-block w-100 rounded rounded-5" src="{{ r.image}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
@@ -39,18 +39,32 @@
             </div>
         </div>
         <div class="col">
+            <h3 class="display-6 py-4">Your favorites:</h3>
             <div class="list-group">
-                {% for r in output %}
-                <a href="/movies/search/results/{{ r.id }}" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ r.title }}</h5>
-                    {% if r.id in faves_ids %}
-                    <img class='check' src="/static/img/R.png" alt="check">
-                    {% endif %}
+                    {% for r in output %}
+                        <a href="/movies/search/results/{{ r.id }}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ r.title }}</h5>
+                            {% if r.id in faves_ids %}
+                            <small><img class='check'src='/static/img/R.png' alt='check'></small>
+                            {% endif %}
+                        </div>
+                        </a>
+                    {% endfor %}
                 </div>
-                </a>
-                {% endfor %}
             </div>
+            <div class="col">
+                <h8 class="display-6 py-4">Popular among friends:</h8>
+                <div class="list-group">
+                        {% for movie in movies %}
+                            <a href="/movies/search/results/{{ movie.imdb_id }}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ movie.title }}</h5>
+                            </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
         </div>
     </div>
 </div>

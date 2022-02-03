@@ -107,6 +107,7 @@ def load_dashboard():
     movies = movie.Movie.get_all()
     output = []
     api_key = "k_kogbi1sw"
+
     for favorite in user_faves:
         api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + favorite.imdb_id
         r = requests.get(api_call).json()
