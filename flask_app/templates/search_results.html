@@ -14,15 +14,15 @@
 			<tbody>
 				{% for result in output %}
 				<tr>
-				<td><img src="{{result.image}}" height="100px"></td>
-				<td class="align-middle"><h3>{{result.title}}</h3></td>
-				<td class="align-middle">{{result.id}}</td>
-				<td class="align-middle">
-					<form action="/movies/search/results/" method="POST" class="mx-auto p-4">
-						<input type="hidden" id="search_select" name="search_select" value="{{result.id}}">
-						<input type="submit" value="Select" class="btn btn-warning">
-					</form>
-				</td>
+					<td><img src="{{result.image}}" height="100px"></td>
+					<td class="align-middle"><h3>{{result.title}}</h3></td>
+					<td class="align-middle">{{result.id}}</td>
+					<td class="align-middle">
+						<form action="/movies/search/results/" method="POST" class="mx-auto p-4">
+							<input type="hidden" id="search_select" name="search_select" value="{{result.id}}">
+							<input type="submit" value="Select" class="btn btn-warning">
+						</form>
+					</td>
 				</tr>
 				{% endfor %}	
 			</tbody>
