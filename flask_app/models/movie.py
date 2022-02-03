@@ -37,9 +37,13 @@ class Movie:
     def get_user_favorites(cls, data):
         query = 'SELECT * FROM movies JOIN favorites ON movies.id = favorites.movie_id WHERE favorites.user_id = %(user_id)s;'
         results = connectToMySQL(cls.db_name).query_db(query, data)
+        user_faves = []
         if len(results) == 0:
-            return None
-        return cls(results[0])
+            return user_faves
+        else: 
+            for row in results:
+                user_faves.append( cls(row))
+        return user_faves
     
     @classmethod
     def get_all(cls):
