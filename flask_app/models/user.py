@@ -63,7 +63,7 @@ class User:
     @classmethod
     def get_by_movie_favorited(cls, data):
         query = 'SELECT * FROM users JOIN favorites ON users.id = favorites.user_id WHERE favorites.movie_id = %(movie_id)s;'
-        results = connectToMySQL(cls.db_name).query_db(query)
+        results = connectToMySQL(cls.db_name).query_db(query, data)
         users_favoring = []
         if len(results) > 0:
             for row in results:

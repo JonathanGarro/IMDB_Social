@@ -48,6 +48,15 @@ class Movie:
         return user_faves
     
     @classmethod
+    def already_favorite(cls, data):
+        query = 'SELECT * FROM favorites WHERE user_id = %(user_id)s AND movie_id = %(movie_id)s;'
+        results = connectToMySQL(cls.db_name).query_db(query, data)
+        if results == False:
+            return False
+        else:
+            return True
+        
+    @classmethod
     def get_all(cls):
         query = 'SELECT * FROM movies;'
         results = connectToMySQL(cls.db_name).query_db(query)
