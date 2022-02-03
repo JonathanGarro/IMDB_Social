@@ -11,10 +11,11 @@ class Movie:
         self.title = data['title']
         self.genre = data['genre']
         self.release_date = data['release_date']
+        self.imdb_id = data['imdb_id']
     
     @classmethod
     def create(cls, data):
-        query = 'INSERT INTO movies (title, genre, release_date) VALUES (%(title)s, %(genre)s, %(release_date)s);'
+        query = 'INSERT INTO movies (title, genre, release_date, imdb_id) VALUES (%(title)s, %(genre)s, %(release_date)s, %(imdb_id)s);'
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     ### SELECT MOVIES ###
