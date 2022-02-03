@@ -58,6 +58,7 @@ def load_dashboard():
     if 'logged_in' not in session:
         return redirect('/')
     member = user.User.get_by_id({'id' : session['member_id']})
+    user_faves = movie.Movie.get_user_favorites({'user_id' : session['member_id']})
     output = movie.Movie.get_all()
     # api_key = "k_kogbi1sw"
     # api_call = 'https://imdb-api.com/en/API/MostPopularMovies/' + api_key + '/'
