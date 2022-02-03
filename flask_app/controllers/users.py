@@ -60,26 +60,26 @@ def register_user():
 
 @app.route('/update/member', methods=['POST'])
 def update_user():
-    if 'user_id' not in session:
+    if 'member_id' not in session:
         return redirect('/logout')
-    if user.User.edit_user(request.form):
-        return redirect("/update/member/{request.form['id']}")
-    # if not user.User.validate_registration(request.form):
-    #     return redirect('/')
+    # if user.User.edit_user(request.form):
+    #     return redirect("/update/member/{request.form['id']}")
     data = {
+        'id' : session['member_id'],
         'first_name' : request.form['first_name'],
         'last_name' : request.form['last_name'],
         'screenname' : request.form['screenname'],
         'email' : request.form['email'],
-        'password' : bcrypt.generate_password_hash(request.form['password'])
+        'city' : request.form['city'],
+        'state' : request.form['state'],
+        'about_me' : request.form['about_me']
         }
-    user.User.create(data)
+    user.User.update_user(data)
     return redirect('/profile_view')
 
 @app.route('/profile_view')
 def view_profile():
     member = user.User.get_by_id({'id' : session['member_id']})
-    print("arrived at redirect")
     return render_template('profile_view.html', member=member )
 
 #route for other users profiles

@@ -6,7 +6,7 @@
             <h1 class="display-6 pt-4">Edit {{ member.first_name }}'s Profile</h1>
             <div class="row">
                 <div class="card border-0 my-5 p-4 bg-light">
-                    <form action="/update/user" method="post">
+                    <form action="/update/member" method="post">
                     {% with messages = get_flashed_messages(category_filter=['register']) %}
                         {% if messages %}
                         <div class="alert alert-danger" role="alert">
@@ -18,35 +18,35 @@
                         {% endif %}
                     {% endwith %}
                     
-                    <h5 class="text-secondary">Screen Name</h5>
+                        <h5 class="text-secondary">Screen Name</h5>
                         <div class="form-group pb-4">
-                            <input type="text" name="screename" class="form-control" value="{{member.screenanme}}" required></label>
+                            <input type="text" name="screenname" class="form-control" value="{{member.screenname}}" required></label>
                         </div>
-                    <h5 class="text-secondary">Email</h5>
+                        <h5 class="text-secondary">Email</h5>
                         <div class="form-group pb-4">
                             <input type="text" name="email"  cols="30" rows="1" class="form-control" value="{{member.email}}" required></label>
                         </div>
-                    <h5 class="text-secondary">First Name</h5>
-                    <div class="form-group pb-4">
-                        <input type="text" name="first_name" class="form-control" value="{{member.first_name}}" required></label>
-                    </div>
-                    <h5 class="text-secondary">Last Name</h5>
+                        <h5 class="text-secondary">First Name</h5>
+                        <div class="form-group pb-4">
+                            <input type="text" name="first_name" class="form-control" value="{{member.first_name}}" required></label>
+                        </div>
+                        <h5 class="text-secondary">Last Name</h5>
                         <div class="form-group pb-4">
                             <input type="text" name="last_name" class="form-control" value="{{member.last_name}}" required></label>
                         </div>
-                    <h5 class="text-secondary">City</h5>
+                        <h5 class="text-secondary">City</h5>
                         <div class="form-group pb-4">
-                            <input type="text" name="City" class="form-control" value="{{member.city}}" required></label>
+                            <input type="text" name="city" class="form-control" value="{{member.city}}" required></label>
                         </div>
-                    <h5 class="text-secondary">State</h5>
+                        <h5 class="text-secondary">State</h5>
                         <div class="form-group pb-4">
                             <input type="text" name="state" class="form-control" value="{{member.state}}" required></label>
                         </div>
-                    <h5 class="text-secondary">About Me</h5>
+                        <h5 class="text-secondary">About Me</h5>
                         <div class="form-group pb-4">
                             <input type="text" name="about_me" class="form-control" value="{{member.about_me}}" required></label>
                         </div>
-                    <a href='/profile_edit' class="btn btn-warning">Edit</a>
+                        <input type="submit" value="Edit" class="btn btn-warning">
                     </form>
                 </div>
             </div>
