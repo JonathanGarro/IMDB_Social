@@ -43,7 +43,7 @@
                     <tbody>
                         {% for movie in movies %}
                         <tr>
-                            <td><a href="/movie_info/{{ movie.id }}">{{ movie.title }}</a></td>
+                            <td><a href="/movies/search/results/{{ movie.imdb_id }}">{{movie.title}}</a></td>
                             <td>{{ movie.release_date }}</td>
                             <td class='text-center'>
                                 {% if movie.imdb_id in faves_ids %}
