@@ -111,3 +111,40 @@ class User:
     
     ### PROFILE VALIDATION ###
     #       suggest we avoid validation on the profile update page by not allowing changes to screenname or email
+    # I don't know how to make a field undeditable, i.e. screenanme, but I think the email needs to be editable
+    @staticmethod
+    def edit_user(user):
+        is_valid = True
+        query = 'SELECT * FROM users WHERE email = %(email)s;'
+        results = connectToMySQL(User.db).query_db(query,user)
+        one_user=User.get_by_email({"email":user["email"]})
+        logged_user=User.get_by_id({"id":session["user_id"]})
+        print (one_user.email)
+        print (logged_user.email)
+        if one_user: 
+            if one_user.email == logged_user.email:
+                flash("Email already in use","register")
+                is_valid=False
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Invalid Email!","register")
+            is_valid=False
+        if len(user['password']) < 8:
+            flash("Password must be at least 8 characters","register")
+            is_valid= False
+        if len(user['first_name']) < 2:
+            flash("First name must be at least 2 characters","register")
+            is_valid= False
+        if len(user['last_name']) < 2:
+            flash("Last name must be at least 2 characters","register")
+            is_valid= False
+        if len(user['city']) < 2:
+            flash("City must be at least 2 characters","register")
+            is_valid= False
+        if len(user['state']) < 2:
+            flash("State must be at least 2 characters","register")
+            is_valid= False
+        if len(user['about_me']) < 10:
+            flash("Add something interesting about you, must be at least 2 characters","register")
+            is_valid= False
+        return is_valid
+        

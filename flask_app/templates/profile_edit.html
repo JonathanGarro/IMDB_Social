@@ -1,6 +1,67 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
+    <main class="container">
+        <div class="bg-light p-2 rounded mt-5">
+    <Div class="text-center"> 
+        <H2>My Profile</H2>
+        <h3 class="text-primary">Please complete all fields:</h3>
+    </Div>
+</main>
+
+<form action="/update/user" method="post" class="col-md-8 p-2 my-2 bg-dark text-light mx-auto">
+    {% with messages = get_flashed_messages(category_filter=['register']) %}
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Incomplete Submission!</strong>
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+
+    <div class="d-flex justify-content-between col-md-12">
+        <div class="col-4 row g-20">
+        <div class="form-group">
+            <label for="screenname">Screenname:
+            <input type="text" name="screename" class="form-control" value="{{member.screenanme}}" required></label>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:
+            <input type="text" name="email"  cols="30" rows="1" class="form-control" value="{{member.email}}" required></label>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:
+            <input type="text" type="password" name="password"  cols="30" rows="1" class="form-control" required></label>
+        </div>
+        <div class="form-group">
+            <label for="first_name">First Name:
+            <input type="text" name="first_name" class="form-control" value="{{member.first_name}}" required></label>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name:
+            <input type="text" name="last_name" class="form-control" value="{{member.last_name}}" required></label>
+        </div>
+        <div class="form-group">
+            <label for="city">City:
+            <input type="text" name="City" class="form-control" value="{{member.city}}" required></label>
+        </div>
+        <div class="form-group">
+            <label for="state">State:
+            <input type="text" name="state" class="form-control" value="{{member.state}}" required></label>
+        </div>
+        <div class="form-group">
+            <label for="about_me">About Me:
+            <input type="text" name="about_me" class="form-control" value="{{member.about_me}}" required></label>
+        </div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+        </div>
+    </div>
+</form>
+</body>
 	
 </div>
 {% endblock content %}

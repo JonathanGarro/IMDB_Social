@@ -15,7 +15,8 @@ def view_movie_info(movie_id):
 
 @app.route('/movies/')
 def search_page():
-    return render_template('movie_search.html')
+    member = user.User.get_by_id({'id' : session['member_id']})
+    return render_template('movie_search.html', member=member)
 
 @app.route('/movies/search/', methods=['POST'])
 def search_movie():
@@ -86,8 +87,3 @@ def add_favorite():
     print("running redirect")
     return redirect('/profile_view')
     
-@app.route('/profile_view')
-def view_profile():
-    print("arrived at redirect")
-    return render_template('profile_view.html')
-        

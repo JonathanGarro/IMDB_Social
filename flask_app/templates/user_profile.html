@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-	<h1 class="display-6 py-4">Hey, {{ member.first_name }}</h1>
-	<p class="lead">Profile lookin' good? If not you can edit it below.</p>
+    <h1 class="display-6 py-4">This is {{ member.first_name }}</h1>
 	<a href='/profile_edit'class="btn btn-warning">Edit</a>
 <div class ="md-4">
 	<h3>Screen Name: {{member.screenname}}</h3>
@@ -14,4 +13,5 @@
 	<h3>About Me: {{member.about_me}}</h3>
 </div>
 </div>
+
 {% endblock content %}

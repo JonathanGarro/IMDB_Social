@@ -3,7 +3,6 @@ from flask import render_template,redirect,session,request, flash, url_for
 from flask_app.models import user
 from flask_app.models import movie
 from flask_bcrypt import Bcrypt
-import requests
 bcrypt = Bcrypt(app)
 
 @app.route('/index')
@@ -51,13 +50,13 @@ def register_user():
         'password' : bcrypt.generate_password_hash(request.form['password'])
         }
     user.User.create(data)
-    return redirect('/dashboard')
+    return redirect('/')
 
 @app.route('/update/member', methods=['POST'])
 def update_user():
-    if 'user_id' not in session:
-        return redirect('/logout')
-    if user.User.edit_user(request.form):
+	if 'user_id' not in session:
+    	return redirect('/logout')
+    if User.edit_user(request.form):
         return redirect(f"/update/member/{request.form['id']}")
     # if not user.User.validate_registration(request.form):
     #     return redirect('/')
@@ -69,41 +68,14 @@ def update_user():
         'password' : bcrypt.generate_password_hash(request.form['password'])
         }
     user.User.create(data)
-    return redirect('/profile_view')
+    return redirect('/')
 
-@app.route('/profile_view')
-def view_profile():
-    member = user.User.get_by_id({'id' : session['member_id']})
-    print("arrived at redirect")
-    return render_template('profile_view.html', member=member )
-
-#route for other users profiles
-#Routing needs to be fixed
-@app.route('/profile_view/<member_id>')
-def view_user_profile(member_id):
-    member = user.User.get_by_id({'id' : member_id})
-    return render_template('user_profile.html', member=member)
-
-
-@app.route('/profile_edit')
-def view_profile_edit():
-    member = user.User.get_by_id({'id': session['member_id']})
-    return render_template('profile_edit.html',member=member)
-    
 
 @app.route('/dashboard')
 def load_dashboard():
     if 'logged_in' not in session:
         return redirect('/')
     member = user.User.get_by_id({'id' : session['member_id']})
-    user_faves = movie.Movie.get_user_favorites({'user_id' : session['member_id']})
     movies = movie.Movie.get_all()
-    output =[]
-    api_key = "k_kogbi1sw"
-    for favorite in user_faves:
-        print(f'---- {favorite.imdb_id}')
-        api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + favorite.imdb_id + '/Images'
-        r = requests.get(api_call).json()
-        output.append(r)
-    print(output)
-    return render_template('dashboard.html', member=member, output=output, user_faves=user_faves, movies=movies)
+    return render_template('dashboard.html', member=member, movies=movies)
+
