@@ -78,6 +78,13 @@ class User:
         return connectToMySQL(cls.db_name).query_db(query, data)
     
     
+    ### UPDATE USER ###
+    @classmethod
+    def update_user(cls, data):
+        query = 'UPDATE users SET first_name = %(first_name)s, last_name= %(last_name)s, screenname = %(screenname)s, email = %(email)s, city = %(city)s, state = %(state)s, about_me = %(about_me)s WHERE id = %(id)s;'
+        return connectToMySQL(cls.db_name).query_db(query, data)
+    
+    
     ### ADD FAVORITE ###
     @classmethod
     def add_favorite(cls, data):
