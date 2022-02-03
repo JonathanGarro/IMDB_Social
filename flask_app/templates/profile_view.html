@@ -1,17 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container">
-	<h1 class="display-6 py-4">Hey, {{ member.first_name }}</h1>
-	<p class="lead">Profile lookin' good? If not you can edit it below.</p>
-	<a href='/profile_edit'class="btn btn-warning">Edit</a>
-<div class ="md-4">
-	<h3>Screen Name: {{member.screenname}}</h3>
-	<h3>Email: {{member.email}}</h3>
-	<h3>First Name: {{member.first_name}}</h3>
-	<h3>Last Name: {{member.last_name}}</h3>
-	<h3>City: {{member.city}}</h3>
-	<h3>State: {{member.state}}</h3>
-	<h3>About Me: {{member.about_me}}</h3>
-</div>
+	<div class="row mt-5">
+		<div class="col-md-5">
+			<h1 class="display-6 pt-4">Hey, {{ member.first_name }}</h1>
+			<p class="lead">Profile lookin' good? If not you can edit it below.</p>
+	<div class="row">
+		<div class="card border-0 p-4 bg-light">
+			<h5 class="text-secondary">Screen Name</h5>
+			<h3 class="pb-4">{{member.screenname}}</h3>
+			<h5 class="text-secondary">First Name</h5>
+			<h3 class="pb-4">{{member.first_name}}</h3>
+			<h5 class="text-secondary">Last Name</h5>
+			<h3 class="pb-4">{{member.last_name}}</h3>
+			<h5 class="text-secondary">City</h5>
+			<h3 class="pb-4">{{member.city}}</h3>
+			<h5 class="text-secondary">State</h5>
+			<h3 class="pb-4">{{member.state}}</h3>
+			<h5 class="text-secondary">About Me</h5>
+			<h3 class="pb-4">{{member.about_me}}</h3>
+			<a href='/profile_edit'class="btn btn-warning">Edit</a>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock content %}
