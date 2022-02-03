@@ -17,14 +17,16 @@
                 </div>
             </div>
             <div class="carousel-inner">
-                {% for item in output %}
+                {% for result in output %}
+                {% if result in member.user_faves %}
             <div class="carousel-item {% if loop.index == 1 %} active{% endif %}"  data-bs-interval="10000">
-                <img class="d-block w-100 rounded rounded-5" src="{{item.image}}" alt="First slide">
+                <img class="d-block w-100 rounded rounded-5" src="{{result.image}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                <h5 class='fw-bold'>{{ item.title }}</h5>
-                <p class='fw-bold'>Rank #{{ item.rank }}</p>
+                <h5 class='fw-bold'>{{ result.title }}</h5>
+                <p class='fw-bold'></p>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -38,11 +40,13 @@
         </div>
         <div class="col">
             <div class="list-group">
-                {% for item in output %}
-                <a href="/movies/search/results/{{ item.id }}" class="list-group-item list-group-item-action">
+                {% for result in output %}
+                <a href="/movies/search/results/{{ result.id }}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ item.title }}</h5>
-                    <small>Rank: #{{ item.rank }}</small>
+                    <h5 class="mb-1">{{ result.title }}</h5>
+                    {% if member in movie.users_favoring %}
+                    <img class='check'src="/static/img/R.jpg" alt="check">
+                    {% endif %}
                 </div>
                 </a>
                 {% endfor %}
