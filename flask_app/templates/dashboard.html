@@ -17,12 +17,12 @@
                 </div>
             </div>
             <div class="carousel-inner">
-                {% for result in output %}
-                {% if result in member.user_faves %}
+                {% for r in output %}
+                {% if r in faves_ids %}
             <div class="carousel-item {% if loop.index == 1 %} active{% endif %}"  data-bs-interval="10000">
-                <img class="d-block w-100 rounded rounded-5" src="{{result.image}}" alt="First slide">
+                <img class="d-block w-100 rounded rounded-5" src="{{ r.image}}" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                <h5 class='fw-bold'>{{ result.title }}</h5>
+                <h5 class='fw-bold'>{{ r.title }}</h5>
                 <p class='fw-bold'></p>
                 </div>
             </div>
@@ -40,11 +40,11 @@
         </div>
         <div class="col">
             <div class="list-group">
-                {% for result in output %}
-                <a href="/movies/search/results/{{ result.id }}" class="list-group-item list-group-item-action">
+                {% for r in output %}
+                <a href="/movies/search/results/{{ r.id }}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ result.title }}</h5>
-                    {% if result.id in faves_ids %}
+                    <h5 class="mb-1">{{ r.title }}</h5>
+                    {% if r.id in faves_ids %}
                     <img class='check'src="/static/img/R.jpg" alt="check">
                     {% endif %}
                 </div>
