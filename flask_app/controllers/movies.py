@@ -84,5 +84,11 @@ def add_favorite():
         'user_id' : session['member_id']
     }
     user.User.add_favorite(fav_data)
-    return redirect('/profile_view.html')
+    print("running redirect")
+    return redirect('/profile_view')
+    
+@app.route('/profile_view')
+def view_profile():
+    print("arrived at redirect")
+    return render_template('profile_view.html')
         

@@ -59,18 +59,13 @@ def load_dashboard():
         return redirect('/')
     member = user.User.get_by_id({'id' : session['member_id']})
     user_faves = movie.Movie.get_user_favorites({'user_id' : session['member_id']})
-    output = movie.Movie.get_all()
-    # api_key = "k_kogbi1sw"
-    # api_call = 'https://imdb-api.com/en/API/MostPopularMovies/' + api_key + '/'
-    # r = requests.get(api_call).json()
-    # output = []
-    # for x in r['items']:
-    #     temp_dict = {}
-    #     temp_dict['title'] = x['title']
-    #     temp_dict['id'] = x['id']
-    #     temp_dict['image'] = x['image']
-    #     temp_dict['rank'] = x['rank']
-    #     output.append(temp_dict)
-    # print(output)
-    return render_template('dashboard.html', member=member, output=output)
-
+    faves_ids = [x.imdb_id for x in user_faves]
+    movies = movie.Movie.get_all()
+    output =[]
+    api_key = "k_kogbi1sw"
+    for favorite in user_faves:
+        api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + favorite.imdb_id
+        r = requests.get(api_call).json()
+        output.append(r)
+    print(output)
+    return render_template('dashboard.html', member=member, output=output, user_faves=user_faves, movies=movies, faves_ids=faves_ids)
