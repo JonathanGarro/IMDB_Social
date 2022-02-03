@@ -79,7 +79,8 @@ def add_favorite():
     }
     favorite = movie.Movie.get_by_title(data)
     if not favorite:
-        favorite = movie.Movie.create(data)
+        movie.Movie.create(data)
+        favorite = movie.Movie.get_by_title(data)
     fav_data = {
         'movie_id' : favorite.id,
         'user_id' : session['member_id']
