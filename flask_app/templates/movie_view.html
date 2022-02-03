@@ -34,10 +34,11 @@
 					</div>
 				</div>
 				<form action="/add_favorite/" method="POST" class="mx-auto p-4">
-					<input type="hidden" id="movie_id" name="movie_id" value="{{output.id}}">
-					<input type="hidden" id="title" name="title" value="{{output.title}}">
-					<input type="hidden" id="genre" name="genre" value="{{output.genres}}">
-					<input type="hidden" id="release_date" name="release_date" value="{{output.year}}">
+				<input type="hidden" id="movie_id" name="movie_id" value="{{output.id}}">
+				<input type="hidden" id="title" name="title" value="{{output.title}}">
+				<input type="hidden" id="genre" name="genre" value="{{output.genres}}">
+				<input type="hidden" id="release_date" name="release_date" value="{{output.year}}">
+				<input type="hidden" id="imdb_id" name="imdb_id" value="{{output.id}}">
 				<input type="submit" value="Favorite!" class="btn btn-warning">
 			</div>
 		</div>

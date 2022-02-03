@@ -44,7 +44,7 @@
                 <a href="/movies/search/results/{{ result.id }}" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ result.title }}</h5>
-                    {% if member in movie.users_favoring %}
+                    {% if result.id in faves_ids %}
                     <img class='check'src="/static/img/R.jpg" alt="check">
                     {% endif %}
                 </div>

@@ -97,13 +97,13 @@ def load_dashboard():
         return redirect('/')
     member = user.User.get_by_id({'id' : session['member_id']})
     user_faves = movie.Movie.get_user_favorites({'user_id' : session['member_id']})
+    faves_ids = [x.imdb_id for x in user_faves]
     movies = movie.Movie.get_all()
     output =[]
     api_key = "k_kogbi1sw"
     for favorite in user_faves:
-        print(f'---- {favorite.imdb_id}')
-        api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + favorite.imdb_id + '/Images'
+        api_call = 'https://imdb-api.com/en/API/Title/' + api_key + '/' + favorite.imdb_id
         r = requests.get(api_call).json()
         output.append(r)
     print(output)
-    return render_template('dashboard.html', member=member, output=output, user_faves=user_faves, movies=movies)
+    return render_template('dashboard.html', member=member, output=output, user_faves=user_faves, movies=movies, faves_ids=faves_ids)

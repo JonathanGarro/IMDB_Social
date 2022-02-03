@@ -74,7 +74,8 @@ def add_favorite():
     data = {
         'title' : request.form['title'],
         'genre' : request.form['genre'],
-        'release_date' : request.form['release_date']
+        'release_date' : request.form['release_date'],
+        'imdb_id' : request.form['imdb_id']
     }
     favorite = movie.Movie.get_by_title(data)
     if not favorite:
